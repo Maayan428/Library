@@ -9,6 +9,7 @@ import pandas as pd
 
 class ManageCSV:
 
+
     @staticmethod
     def add_book_to_csv(filename, book):
         book_dict = book.to_dict()
@@ -168,6 +169,21 @@ class ManageCSV:
             return f"Error: Column not found in file - {str(e)}"
         except Exception as e:
             return f"Error: {str(e)}"
-
-
+    @staticmethod
+    def get_popular_books():
+        file_name = FileCSV.file_book.value
+        top_n=10
+        min_requests = 10
+        try:
+            df = pd.read_csv(file_name)
+            if "requests" not in df.columns:
+                raise ValueError("The column 'requests' does not exist in the CSV file.")
+            df["requests"] = pd.to_numeric(df["requests"], errors="coerce").fillna(0)
+            filtered_df = df[df["requests"] >= min_requests]
+            sorted_df = filtered_df.sort_values(by="requests", ascending=False)
+            return sorted_df.head(top_n)
+        except FileNotFoundError:
+            print("Error: File not found.")
+        except Exception as e:
+            print(f"Error: {str(e)}")
 

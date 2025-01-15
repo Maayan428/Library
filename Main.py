@@ -5,27 +5,23 @@ from SystemManagement.Librarians import Librarians
 from SystemManagement.Library import Library
 from SystemManagement.PopularBooks import PopularBook
 from SystemManagement.Book.Book import Book
+from Subscriptions.Members import Members
 import sys
 import os
 
 class Main:
 
     library = Library.get_instance()
-    # library.sign_in("anna", "lama", "123", "123", "123")
+    librarian= Librarians("anna", "lama", "123", "123")
+    Library.register_librarian(librarian)
     book1 = Book("the maayan", "J.K. Rowling", "Yes", 3, BookGenre.Satire.value, 1997)
     book2 = Book("the eden", "J.R.R. Tolkien", "No", 1, BookGenre.Classic.value, 1937)
+    member= Members("yael", "0987765")
+    #librarian.add_new_book(book1)
+    librarian.lend_book_to_member(member, book1)
 
-
-    ManageCSV.add_book_to_csv(FileCSV.file_available.value,book1)
-    ManageCSV.add_book_to_csv(FileCSV.file_available.value, book1)
-    ManageCSV.add_book_to_csv(FileCSV.file_available.value, book1)
-    ManageCSV.add_book_to_csv(FileCSV.file_available.value,book2)
-    ManageCSV.delete_book_from_csv(FileCSV.file_available.value,book1)
-    # count=ManageCSV.return_appearances(FileCSV.file_available.value,book2)
-    # print(count)
-    # ManageCSV.add_to_parameter(FileCSV.file_book.value,book2,"copies")
-    # ManageCSV.sub_from_parameter(FileCSV.file_book.value,book2,"copies")
-    # librarian.add_new_book(book2)
+    librarian.return_book_to_library(book1)
+    print(library.get_notifications())
     # t=ManageCSV.get_value_other(FileCSV.file_book.value,book2,"title")
     # c=ManageCSV.get_value_books(book2,"copies")
     # print(t)
@@ -44,7 +40,7 @@ class Main:
     # print(num2)
     #
     # print("\n--- Lending a Book to a Member ---")
-    # librarian.lend_book_to_member(member, book1)
+
     # if book1.waiting_list:
     #     print(f"\n {book1.pop_first_member().get_member_id()}")
     # else:
