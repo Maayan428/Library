@@ -1,10 +1,6 @@
-from os.path import exists
-
 from SystemManagement.Library import Library
-from SystemManagement.PopularBooks import PopularBook
 from SystemManagement.Book.FileCSV import FileCSV
-from Subscriptions.Members import Members
-from SystemManagement.Book.ManageCSV import ManageCSV
+from SystemManagement.ManageCSV import ManageCSV
 from werkzeug.security import generate_password_hash
 
 
@@ -90,7 +86,7 @@ class Librarians:
                 return True
             else:
                 ManageCSV.add_to_parameter(FileCSV.file_book.value, book, "requests")
-                book.add_waiting_list(member)
+                ManageCSV.add_to_waiting_list(book.to_dict()["title"], member)
                 Library.get_instance().notification_system.notify_observers(f"Member: {member.to_dict()["name"]} added "
                                                                             f"to the waiting list of the book: {book.to_dict()["title"]}")
                 return False
@@ -107,8 +103,8 @@ class Librarians:
             ManageCSV.add_book_to_csv(FileCSV.file_available.value, book)
             ManageCSV.sub_from_parameter(FileCSV.file_book.value,book,"currently_loaned")
             ManageCSV.update_is_loaned(book)
-            if book.waiting_list:
-                person = book.pop_first_member()
+            person = ManageCSV.pop_from_waiting_list(book.to_dict()["title"])
+            if person is not None:
                 Library.get_instance().notification_system.notify_observers(f"The book: {book.to_dict()["title"]} has been returned."
                                                                             f"\n Member: {person.to_dict()["name"]} is waiting for it:) \n Notify at: {person.to_dict()["phone_number"]}")
                 Librarians.lend_book_to_member(person, book)

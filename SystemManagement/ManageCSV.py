@@ -1,3 +1,4 @@
+import pickle
 from symtable import Class
 import csv
 
@@ -8,7 +9,6 @@ import pandas as pd
 
 
 class ManageCSV:
-
 
     @staticmethod
     def add_book_to_csv(filename, book):
@@ -169,6 +169,7 @@ class ManageCSV:
             return f"Error: Column not found in file - {str(e)}"
         except Exception as e:
             return f"Error: {str(e)}"
+
     @staticmethod
     def get_popular_books():
         file_name = FileCSV.file_book.value
@@ -187,3 +188,61 @@ class ManageCSV:
         except Exception as e:
             print(f"Error: {str(e)}")
 
+    @staticmethod
+    def add_to_waiting_list(book_title, member):
+        file_name = FileCSV.file_book.value
+        try:
+            df = pd.read_csv(file_name)
+            if "waiting_list" not in df.columns:
+                raise ValueError("The column 'waiting_list' does not exist in the CSV file.")
+
+            condition = df["title"] == book_title
+            if condition.sum() == 0:
+                raise ValueError(f"Book '{book_title}' not found.")
+
+            waiting_list = df.loc[condition, "waiting_list"].iloc[0]
+
+            if pd.isna(waiting_list) or waiting_list == "":
+                waiting_list = []
+            else:
+                waiting_list = pickle.loads(eval(waiting_list))
+            waiting_list.append(member)
+            df.loc[condition, "waiting_list"] = str(pickle.dumps(waiting_list))
+
+            df.to_csv(file_name, index=False, encoding="utf-8")
+            print(f"Member {member.name} added to the waiting list for book '{book_title}'.")
+        except Exception as e:
+            print(f"Error: {str(e)}")
+
+    @staticmethod
+    def pop_from_waiting_list(book_title):
+        file_name = FileCSV.file_book.value
+        try:
+            df = pd.read_csv(file_name)
+            if "waiting_list" not in df.columns:
+                raise ValueError("The column 'waiting_list' does not exist in the CSV file.")
+
+            condition = df["title"] == book_title
+            if condition.sum() == 0:
+                raise ValueError(f"Book '{book_title}' not found.")
+
+            waiting_list_serialized = df.loc[condition, "waiting_list"].iloc[0]
+
+            if pd.isna(waiting_list_serialized) or waiting_list_serialized == "":
+                print(f"No members in the waiting list for book '{book_title}'.")
+                return None
+
+            waiting_list = pickle.loads(eval(waiting_list_serialized))
+
+            if not waiting_list:
+                print(f"No members in the waiting list for book '{book_title}'.")
+                return None
+
+            first_member = waiting_list.pop(0)
+            df.loc[condition, "waiting_list"] = str(pickle.dumps(waiting_list))
+            df.to_csv(file_name, index=False, encoding="utf-8")
+            print(f"Member {first_member['name']} removed from the waiting list for book '{book_title}'.")
+            return first_member
+        except Exception as e:
+            print(f"Error: {str(e)}")
+            return None

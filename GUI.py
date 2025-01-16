@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 import pandas as pd
-from multiprocessing.resource_tracker import register
 import logging
 from SystemManagement.Logger import Logger
 from SystemManagement.Book.FileCSV import FileCSV
@@ -10,9 +9,9 @@ from SystemManagement.Book.Book import Book
 from SystemManagement import Librarians
 from SystemManagement.Book.FactoryBook import FactoryBook
 from SystemManagement.Library import Library
-from SystemManagement.Book.ManageCSV import ManageCSV
+from SystemManagement.ManageCSV import ManageCSV
 from SystemManagement.Book.BookGenre import BookGenre
-from werkzeug.security import check_password_hash
+
 logging.basicConfig(filename="action_History.txt",level=logging.INFO,format='%(asctime)s - %(message)s',datefmt='%Y-%m-%d %H:%M:%S')
 
 welcome_page = tk.Tk()
@@ -236,6 +235,7 @@ def add_book(parent_window):
 
 
 def search_books_view():
+    clear_main_content()
     for widget in home_page.winfo_children():
         if isinstance(widget, ttk.Treeview) or widget.winfo_name() in ["excel_frame", "button_frame"]:
             widget.destroy()
@@ -762,7 +762,7 @@ def return_selected_book(tree, df):
 
     selected_book = tree.item(selected_item)["values"]
     try:
-        book = Book(
+        book = FactoryBook.create_book(
             title=selected_book[0],
             author=selected_book[1],
             is_loaned=selected_book[2],
@@ -777,8 +777,10 @@ def return_selected_book(tree, df):
             raise ValueError("Failed to return the book.")
         elif result==1:
             show_success_message(f"The book '{book.title}' has been returned successfully and lent to the next member in line!")
+            new_notification_popup()
         else:
             show_success_message(f"The book '{book.title}' has been returned successfully!")
+
 
         df = pd.read_csv(FileCSV.file_book.value)
         for row in tree.get_children():
@@ -808,7 +810,7 @@ def show_popular_books():
     action_frame = tk.Frame(home_page, bg='#ffc3e3', padx=10, pady=10, name="action_frame")
     action_frame.pack(fill='x', pady=10)
 
-    search_label = tk.Label(action_frame, text="Most popular books:", font=('Arial', 18, 'bold'), bg='#ffc3e3', fg='black')
+    search_label = tk.Label(action_frame, text="👑 Most popular books 👑", font=('Arial', 18, 'bold'), bg='#ffc3e3', fg='black')
     search_label.pack(side='top', padx=5)
 
     table_frame = tk.Frame(home_page, bg='#ffe6f0', padx=10, pady=10, name="excel_frame")
@@ -975,7 +977,7 @@ back_button_top = tk.Button(log_in_page, text="Back", font=('Helvetica', 16), bg
                             highlightbackground='#ffe6f0', command=back_to_welcome)
 back_button_top.pack(side='top', anchor='ne', padx=10, pady=10)
 
-frame = tk.Frame(log_in_page, bg='#b30047')
+frame = tk.Frame(log_in_page, bg='#b30047', width=200, height=800)
 frame.place(relx=0.5, rely=0.5, anchor='center')
 
 top_bar = tk.Frame(home_page, bg='#b30047', height=70)
@@ -989,17 +991,17 @@ log_out_button = tk.Button(top_bar, text="Log Out", font=('Arial', 12), bg='#ffc
 log_out_button.pack(side='right', padx=10, pady=10)
 
 
-username_label = tk.Label(frame, text="Username:", font=('Helvetica', 16), bg='#b30047', fg='white')
-username_label.grid(row=0, column=0, padx=5, pady=5, sticky='w')
+username_label = tk.Label(frame, text="Username:", font=('Helvetica', 20), bg='#b30047', fg='white')
+username_label.grid(row=0, column=0, padx=20, pady=20, sticky='w')
 
 e1 = tk.Entry(frame, width=40, bg='#ffe6f0', fg='black', font=('Helvetica', 16), borderwidth=2)
-e1.grid(row=1, column=0, padx=5, pady=5)
+e1.grid(row=1, column=0, padx=20, pady=20)
 
-password_label = tk.Label(frame, text="Password:", font=('Helvetica', 16), bg='#b30047', fg='white')
-password_label.grid(row=2, column=0, padx=5, pady=5, sticky='w')
+password_label = tk.Label(frame, text="Password:", font=('Helvetica', 20), bg='#b30047', fg='white')
+password_label.grid(row=2, column=0, padx=20, pady=20, sticky='w')
 
 e2 = tk.Entry(frame, width=40, bg='#ffe6f0', fg='black', font=('Helvetica', 16), borderwidth=2, show="*")
-e2.grid(row=3, column=0, padx=5, pady=5)
+e2.grid(row=3, column=0, padx=20, pady=20)
 
 log_in_button = tk.Button(frame, text="Log In", font=('Ariel ', 18, 'bold'), width=10, height=2,
                           fg='#b30047', bg='#ffe6f0', borderwidth=1, highlightbackground='#ffe6f0',
@@ -1012,35 +1014,35 @@ error_label.grid(row=6, column=0, padx=10, pady=10)
 sign_in_frame = tk.Frame(sign_in_page, bg='#b30047', padx=20, pady=20)
 sign_in_frame.place(relx=0.5, rely=0.5, anchor='center')
 
-first_name_label = tk.Label(sign_in_frame, text="First name:", font=('Helvetica', 16), bg='#b30047', fg='white')
+first_name_label = tk.Label(sign_in_frame, text="First name:", font=('Helvetica', 20), bg='#b30047', fg='white')
 first_name_label.grid(row=0, column=0, padx=5, pady=5, sticky='w')
 first_name_entry = tk.Entry(sign_in_frame, width=40, bg='#ffe6f0', fg='black', font=('Helvetica', 16), borderwidth=2)
 first_name_entry.grid(row=1, column=0, padx=5, pady=5)
 first_name_error_label = tk.Label(sign_in_frame, text="", font=('Helvetica', 16), fg="black", bg='#b30047')
 first_name_error_label.grid(row=2, column=0, padx=5, pady=5, sticky='w')
 
-last_name_label = tk.Label(sign_in_frame, text="Last name:", font=('Helvetica', 16), bg='#b30047', fg='white')
+last_name_label = tk.Label(sign_in_frame, text="Last name:", font=('Helvetica', 20), bg='#b30047', fg='white')
 last_name_label.grid(row=3, column=0, padx=5, pady=5, sticky='w')
 last_name_entry = tk.Entry(sign_in_frame, width=40, bg='#ffe6f0', fg='black', font=('Helvetica', 16), borderwidth=2)
 last_name_entry.grid(row=4, column=0, padx=5, pady=5)
 last_name_error_label = tk.Label(sign_in_frame, text="", font=('Helvetica', 16), fg="black", bg='#b30047')
 last_name_error_label.grid(row=5, column=0, padx=5, pady=5, sticky='w')
 
-username_label = tk.Label(sign_in_frame, text="Username:", font=('Helvetica', 16), bg='#b30047', fg='white')
+username_label = tk.Label(sign_in_frame, text="Username:", font=('Helvetica', 20), bg='#b30047', fg='white')
 username_label.grid(row=6, column=0, padx=5, pady=5, sticky='w')
 username_entry = tk.Entry(sign_in_frame, width=40, bg='#ffe6f0', fg='black', font=('Helvetica', 16), borderwidth=2)
 username_entry.grid(row=7, column=0, padx=5, pady=5)
 username_error_label = tk.Label(sign_in_frame, text="", font=('Helvetica', 16), fg="black", bg='#b30047')
 username_error_label.grid(row=8, column=0, padx=5, pady=5, sticky='w')
 
-password_label = tk.Label(sign_in_frame, text="Password:", font=('Helvetica', 16), bg='#b30047', fg='white')
+password_label = tk.Label(sign_in_frame, text="Password:", font=('Helvetica', 20), bg='#b30047', fg='white')
 password_label.grid(row=9, column=0, padx=5, pady=5, sticky='w')
 password_entry = tk.Entry(sign_in_frame, width=40, bg='#ffe6f0', fg='black', font=('Helvetica', 16), borderwidth=2, show="*")
 password_entry.grid(row=10, column=0, padx=5, pady=5)
 password_error_label = tk.Label(sign_in_frame, text="", font=('Helvetica', 16), fg="black", bg='#b30047')
 password_error_label.grid(row=11, column=0, padx=5, pady=5, sticky='w')
 
-conf_password_label = tk.Label(sign_in_frame, text="Confirm Password:", font=('Helvetica', 16), bg='#b30047', fg='white')
+conf_password_label = tk.Label(sign_in_frame, text="Confirm Password:", font=('Helvetica', 20), bg='#b30047', fg='white')
 conf_password_label.grid(row=12, column=0, padx=5, pady=5, sticky='w')
 conf_password_entry = tk.Entry(sign_in_frame, width=40, bg='#ffe6f0', fg='black', font=('Helvetica', 16), borderwidth=2, show="*")
 conf_password_entry.grid(row=13, column=0, padx=5, pady=5)
