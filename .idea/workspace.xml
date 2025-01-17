@@ -5,27 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e67b136-c28a-4b38-a909-55c74d892554" name="Changes" comment="library">
-      <change afterPath="$PROJECT_DIR$/README.md.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SystemManagement/InitFiles.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/TestLibrarians.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/TestLibrary.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/TestManageCSV.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project:" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemManagement/Book/Book.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Book/Book.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemManagement/Book/FactoryBook.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Book/FactoryBook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemManagement/Book/ManageCSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/ManageCSV.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SystemManagement/Book/available_books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Book/available_books.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SystemManagement/Book/books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Book/books.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SystemManagement/Book/loaned_books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Book/loaned_books.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SystemManagement/Librarians.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Librarians.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemManagement/Library.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemManagement/PopularBooks.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Book/PopularBooks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemManagement/Users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemManagement/ManageCSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/ManageCSV.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/TestManageCSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestManageCSV.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +75,7 @@
     "Python tests.Python tests for TestLibrary.TestLibrary.test_get_notifications_with_notifications.executor": "Run",
     "Python tests.Python tests for TestLibrary.TestLibrary.test_register_librarian_existing_user.executor": "Run",
     "Python tests.Python tests for TestLibrary.TestLibrary.test_register_librarian_new_user.executor": "Run",
+    "Python tests.Python tests for TestManageCSV.TestManageCSV.executor": "Run",
     "Python tests.Python tests for TestManageCSV.TestManageCSV.test_add_book_to_csv_failure.executor": "Run",
     "Python tests.Python tests for TestManageCSV.TestManageCSV.test_add_book_to_csv_success.executor": "Run",
     "Python tests.Python tests for TestManageCSV.TestManageCSV.test_add_new_book_failure.executor": "Run",
@@ -119,6 +107,7 @@
     "Python.Book.executor": "Run",
     "Python.FileCSV.executor": "Run",
     "Python.GUI.executor": "Run",
+    "Python.InitFiles.executor": "Run",
     "Python.Library.executor": "Run",
     "Python.Main.executor": "Run",
     "Python.ManageCSV.executor": "Run",
@@ -143,6 +132,38 @@
     </key>
   </component>
   <component name="RunManager" selected="Python tests.Python tests for TestManageCSV.TestManageCSV">
+    <configuration name="Python tests for TestLibrarians.TestLibrarians" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;TestLibrarians.TestLibrarians&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for TestLibrary.TestLibrary" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;TestLibrary.TestLibrary&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for TestManageCSV.TestManageCSV" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="PythonProject" />
       <option name="ENV_FILES" value="" />
@@ -175,22 +196,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for TestManageCSV.TestManageCSV.test_get_popular_books_empty_dataframe" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="PythonProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestManageCSV.TestManageCSV.test_get_popular_books_empty_dataframe&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests for TestManageCSV.TestManageCSV.test_pop_from_waiting_list" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="PythonProject" />
       <option name="ENV_FILES" value="" />
@@ -207,29 +212,13 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for TestManageCSV.TestManageCSV.test_pop_from_waiting_list_member_exists" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="PythonProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestManageCSV.TestManageCSV.test_pop_from_waiting_list_member_exists&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests for TestManageCSV.TestManageCSV" />
-        <item itemvalue="Python tests.Python tests for TestManageCSV.TestManageCSV.test_add_to_waiting_list" />
         <item itemvalue="Python tests.Python tests for TestManageCSV.TestManageCSV.test_pop_from_waiting_list" />
-        <item itemvalue="Python tests.Python tests for TestManageCSV.TestManageCSV.test_pop_from_waiting_list_member_exists" />
-        <item itemvalue="Python tests.Python tests for TestManageCSV.TestManageCSV.test_get_popular_books_empty_dataframe" />
+        <item itemvalue="Python tests.Python tests for TestManageCSV.TestManageCSV.test_add_to_waiting_list" />
+        <item itemvalue="Python tests.Python tests for TestLibrary.TestLibrary" />
+        <item itemvalue="Python tests.Python tests for TestLibrarians.TestLibrarians" />
       </list>
     </recent_temporary>
   </component>
@@ -256,7 +245,8 @@
       <workItem from="1736852886008" duration="13243000" />
       <workItem from="1736867310254" duration="118000" />
       <workItem from="1736929100042" duration="36491000" />
-      <workItem from="1737015750711" duration="30858000" />
+      <workItem from="1737015750711" duration="30928000" />
+      <workItem from="1737099568610" duration="4939000" />
     </task>
     <task id="LOCAL‎-00001" summary="library">
       <option name="closed" value="true" />
@@ -298,7 +288,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1736978067889</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="library">
+      <option name="closed" value="true" />
+      <created>1737053075778</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1737053075778</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,13 +317,25 @@
     <MESSAGE value="library" />
     <option name="LAST_COMMIT_MESSAGE" value="library" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GUI.py</url>
+          <line>773</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonProject$Main.coverage" NAME="Main Coverage Results" MODIFIED="1737023274997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonProject$InitFiles.coverage" NAME="InitFiles Coverage Results" MODIFIED="1737102180237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SystemManagement" />
+    <SUITE FILE_PATH="coverage/PythonProject$Main.coverage" NAME="Main Coverage Results" MODIFIED="1737102451277" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonProject$FileCSV.coverage" NAME="FileCSV Coverage Results" MODIFIED="1736508331405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SystemManagement/Book" />
     <SUITE FILE_PATH="coverage/PythonProject$Book.coverage" NAME="Book Coverage Results" MODIFIED="1736455888986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SystemManagement/Book" />
-    <SUITE FILE_PATH="coverage/PythonProject$ManageCSV.coverage" NAME="ManageCSV Coverage Results" MODIFIED="1736458803942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SystemManagement/Book" />
-    <SUITE FILE_PATH="coverage/PythonProject$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1737052900535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonProject$ManageCSV.coverage" NAME="ManageCSV Coverage Results" MODIFIED="1737101443611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SystemManagement" />
+    <SUITE FILE_PATH="coverage/PythonProject$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1737104065552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonProject$Library.coverage" NAME="Library Coverage Results" MODIFIED="1736964812700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SystemManagement" />
-    <SUITE FILE_PATH="coverage/PythonProject$.coverage" NAME=" Coverage Results" MODIFIED="1737052949604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tests" />
+    <SUITE FILE_PATH="coverage/PythonProject$.coverage" NAME=" Coverage Results" MODIFIED="1737104488004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tests" />
   </component>
 </project>

@@ -42,11 +42,11 @@ class Main:
     # print("\n--- Returning a Book to the Library ---")
     # librarian.return_book_to_library(book1)
     #
-    # InitFiles.init_books_csv()
+    InitFiles.init_books_csv()
     InitFiles.ensure_required_columns()
     InitFiles.initialize_waiting_list()
-    # InitFiles.initialize_csv_files()
-    # InitFiles.sort_books()
+    InitFiles.initialize_csv_files()
+    InitFiles.sort_books()
     # InitFiles.init_users_csv()
 
 

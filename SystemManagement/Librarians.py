@@ -110,36 +110,3 @@ class Librarians:
                 Librarians.lend_book_to_member(person, book)
                 return 1
             return 2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

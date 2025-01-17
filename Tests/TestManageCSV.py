@@ -1,3 +1,4 @@
+import json
 import pickle
 import unittest
 from unittest.mock import patch, Mock
@@ -395,65 +396,39 @@ class TestManageCSV(unittest.TestCase):
     @patch("pandas.DataFrame.to_csv")
     @patch("pandas.read_csv")
     def test_add_to_waiting_list(self, mock_read_csv, mock_to_csv):
+        # Arrange
         file_name = FileCSV.file_book.value
         book_title = "Test Book"
-        member_mock = {"name": "Test Member", "phone_number": "00000"}  # Member as a dictionary
+        member_mock = Members(name="Test Member", phone_number="00000")  # Member as object
 
+        # Simulate initial data with an empty waiting list
         initial_data = pd.DataFrame({
             "title": ["Test Book"],
             "waiting_list": [str(pickle.dumps([]))]
         })
         mock_read_csv.return_value = initial_data
+
         updated_data = pd.DataFrame({
             "title": ["Test Book"],
             "waiting_list": [str(pickle.dumps([member_mock]))]
         })
 
+        # Mock the DataFrame that would be passed to to_csv
         def mock_to_csv_side_effect(df, *args, **kwargs):
+            # Assert DataFrame was updated correctly before being written
             pd.testing.assert_frame_equal(df, updated_data)
 
         mock_to_csv.side_effect = mock_to_csv_side_effect
+
+        # Act
         ManageCSV.add_to_waiting_list(book_title, member_mock)
 
+        # Assert
         mock_read_csv.assert_called_once_with(file_name)
         mock_to_csv.assert_called_once()
-        print("Test passed: DataFrame updated and to_csv called as expected.")
-    #
-    # @patch("pandas.DataFrame.to_csv")
-    # @patch("pandas.read_csv")
-    # def test_pop_from_waiting_list(self, mock_read_csv, mock_to_csv):
-    #     # Arrange
-    #     file_name = FileCSV.file_book.value
-    #     book_title = "Test Book"
-    #     member_mock = {"name": "Test Member", "phone_number": "00000"}
-    #
-    #     # Simulate initial data with a waiting list containing one member
-    #     initial_data = pd.DataFrame({
-    #         "title": ["Test Book"],
-    #         "waiting_list": [str(pickle.dumps([member_mock]))]
-    #     })
-    #     mock_read_csv.return_value = initial_data
-    #
-    #     updated_data = pd.DataFrame({
-    #         "title": ["Test Book"],
-    #         "waiting_list": [str(pickle.dumps([]))]
-    #     })
-    #
-    #     # Mock the DataFrame that would be passed to to_csv
-    #     def mock_to_csv_side_effect(df, *args, **kwargs):
-    #         pd.testing.assert_frame_equal(df, updated_data)
-    #
-    #     mock_to_csv.side_effect = mock_to_csv_side_effect
-    #
-    #     # Act
-    #     result = ManageCSV.pop_from_waiting_list(book_title)
-    #
-    #     # Assert
-    #     self.assertEqual(result, member_mock)  # Verify the correct member was returned
-    #     mock_read_csv.assert_called_once_with(file_name)
-    #     mock_to_csv.assert_called_once()
-    #     print("Test passed: Member popped correctly and DataFrame updated.")
-    #
+        print("Test passed: Member added to waiting list.")
+
+
 
 if __name__ == "__main__":
     unittest.main()

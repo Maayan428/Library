@@ -241,7 +241,7 @@ class ManageCSV:
             first_member = waiting_list.pop(0)
             df.loc[condition, "waiting_list"] = str(pickle.dumps(waiting_list))
             df.to_csv(file_name, index=False, encoding="utf-8")
-            print(f"Member {first_member['name']} removed from the waiting list for book '{book_title}'.")
+            print(f"Member {first_member.to_dict()["name"]} removed from the waiting list for book '{book_title}'.")
             return first_member
         except Exception as e:
             print(f"Error: {str(e)}")
