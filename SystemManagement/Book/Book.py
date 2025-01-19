@@ -32,6 +32,9 @@ class Book:
             "year": self.year
         }
 
+    def get_title(self):
+        return self.title
+
 
 
 

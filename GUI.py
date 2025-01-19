@@ -6,13 +6,11 @@ from SystemManagement.Logger import Logger
 from SystemManagement.Book.FileCSV import FileCSV
 from Subscriptions.Members import Members
 from SystemManagement.Book.Book import Book
-from SystemManagement import Librarians
+from SystemManagement.Librarians import Librarians
 from SystemManagement.Book.FactoryBook import FactoryBook
 from SystemManagement.Library import Library
 from SystemManagement.ManageCSV import ManageCSV
 from SystemManagement.Book.BookGenre import BookGenre
-
-logging.basicConfig(filename="action_History.txt",level=logging.INFO,format='%(asctime)s - %(message)s',datefmt='%Y-%m-%d %H:%M:%S')
 
 welcome_page = tk.Tk()
 welcome_page.geometry("1500x1000")
@@ -65,11 +63,15 @@ def open_home_page():
     sign_in_page.withdraw()
     home_page.deiconify()
 
-def back_to_welcome():
+def open_welcome():
     home_page.withdraw()
     log_in_page.withdraw()
     sign_in_page.withdraw()
     welcome_page.deiconify()
+
+def close_welcome_page():
+    welcome_page.withdraw()
+    welcome_page.destroy()
 
 @Logger.log_decorator(
     success_message="log out successful",
@@ -78,7 +80,7 @@ def back_to_welcome():
 def log_out():
     clear_main_content()
     home_page.withdraw()
-    log_in_page.deiconify()
+    welcome_page.deiconify()
 
 @Logger.log_decorator(
     success_message="logged in successfully",
@@ -131,7 +133,7 @@ def register_librarian_from_gui():
 
     if first_name and last_name and user_name and password and conf_password and password == conf_password and not ManageCSV.user_exists(
             user_name):
-        librarian = Librarians.Librarians(first_name, last_name, user_name, password)
+        librarian = Librarians(first_name, last_name, user_name, password)
         result = Library.register_librarian(librarian)
         if result != "Librarian added successfully":
             raise ValueError("Registration failed")
@@ -226,7 +228,7 @@ def add_book(parent_window):
 
     if title and author and copies.isdigit() and genre and year.isdigit():
         new_book = FactoryBook.create_book(title, author, "No", int(copies), genre, int(year))
-        Librarians.Librarians.add_new_book(new_book)
+        Librarians.add_new_book(new_book)
         parent_window.destroy()
         show_book_added_message()
         new_notification_popup()
@@ -341,9 +343,9 @@ def search_books(entries, tree, df):
         success_message = build_log_message(search_criteria, success=True)
         Logger.get_logger().info(success_message)
 
-    except Exception as e:
+    except Exception:
         fail_message = build_log_message(search_criteria, success=False)
-        Logger.get_logger().error(f"{fail_message}: {str(e)}")
+        Logger.get_logger().error(f"{fail_message}")
         raise
 
 def get_search_criteria(entries):
@@ -581,7 +583,7 @@ def delete_selected_book(tree):
         error_label.pack(pady=10)
         return
     selected_book = tree.item(selected_item)["values"]
-    title = selected_book[0]
+    title = str(selected_book[0])
     author = selected_book[1]
     is_loaned = selected_book[2]
     copies = selected_book[3]
@@ -589,7 +591,7 @@ def delete_selected_book(tree):
     year = selected_book[5]
 
     book_to_delete = FactoryBook.create_book(title=title, author=author, is_loaned=is_loaned, copies=copies, genre=genre,year=year)
-    result = Librarians.Librarians.remove_book(book_to_delete)
+    result = Librarians.remove_book(book_to_delete)
     if not result:
         show_error_message("Error!\nAll books are lent!")
         raise ValueError("")
@@ -679,7 +681,7 @@ def lend_book_action(lend_window, name, phone, selected_book):
         raise ValueError("Name and phone number are required!")
 
     book = FactoryBook.create_book(
-        title=selected_book[0],
+        title=str(selected_book[0]),
         author=selected_book[1],
         is_loaned=selected_book[2],
         copies=selected_book[3],
@@ -687,7 +689,7 @@ def lend_book_action(lend_window, name, phone, selected_book):
         year=selected_book[5]
     )
     member = Members(name, phone)
-    result = Librarians.Librarians.lend_book_to_member(member, book)
+    result = Librarians.lend_book_to_member(member, book)
     if result:
         show_success_message(f"Book '{book.title}' lent successfully to {name}!")
         new_notification_popup()
@@ -763,7 +765,7 @@ def return_selected_book(tree, df):
     selected_book = tree.item(selected_item)["values"]
     try:
         book = FactoryBook.create_book(
-            title=selected_book[0],
+            title=str(selected_book[0]),
             author=selected_book[1],
             is_loaned=selected_book[2],
             copies=selected_book[3],
@@ -771,7 +773,7 @@ def return_selected_book(tree, df):
             year=selected_book[5]
         )
 
-        result = Librarians.Librarians.return_book_to_library(book)
+        result = Librarians.return_book_to_library(book)
         if result==0:
             show_error_message(f"Book '{book.title}' is not currently loaned.")
             raise ValueError("Failed to return the book.")
@@ -942,7 +944,7 @@ def show_registration_success_message():
     message_label.pack(pady=20)
 
     back_button = tk.Button(success_window, text="Back to Log In", font=('Helvetica', 12), bg='#ffe6f0', fg='#b30047', width=15,
-                            command=lambda: [success_window.destroy(), back_to_welcome()])
+                            command=lambda: [success_window.destroy(), open_welcome()])
     back_button.pack(pady=10)
 
 def show_book_added_message():
@@ -970,11 +972,11 @@ s_login_button = tk.Button(welcome_page, text="Log In", font=('Helvetica', 18, '
 s_login_button.pack(pady=10)
 
 back_button_top = tk.Button(sign_in_page, text="Back", font=('Helvetica', 16), bg='#ffe6f0', fg='#b30047', relief='flat',
-                            highlightbackground='#ffe6f0', command=back_to_welcome)
+                            highlightbackground='#ffe6f0', command=open_welcome)
 back_button_top.pack(side='top', anchor='ne', padx=10, pady=10)
 
 back_button_top = tk.Button(log_in_page, text="Back", font=('Helvetica', 16), bg='#ffe6f0', fg='#b30047', relief='flat',
-                            highlightbackground='#ffe6f0', command=back_to_welcome)
+                            highlightbackground='#ffe6f0', command=open_welcome)
 back_button_top.pack(side='top', anchor='ne', padx=10, pady=10)
 
 frame = tk.Frame(log_in_page, bg='#b30047', width=200, height=800)
@@ -987,7 +989,7 @@ top_label = tk.Label(top_bar, text="E&M Library", font=('Arial', 20, 'bold'), bg
 top_label.place(relx=0.5, rely=0.5, anchor='center')
 
 log_out_button = tk.Button(top_bar, text="Log Out", font=('Arial', 12), bg='#ffccdf', fg='#b30047', relief='flat',
-                           highlightbackground='#ffe6f0', command=back_to_welcome)
+                           highlightbackground='#ffe6f0', command=log_out)
 log_out_button.pack(side='right', padx=10, pady=10)
 
 

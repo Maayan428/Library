@@ -59,8 +59,9 @@ class ManageCSV:
     @staticmethod
     def return_appearances(filename, book):
         df = pd.read_csv(filename)
-        count = df[df["title"] == book.to_dict()["title"]].shape[0]
+        count = df[df['title'] == book.to_dict()['title']].shape[0]
         return count
+
 
     @staticmethod
     def user_exists(user_name):

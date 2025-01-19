@@ -73,6 +73,8 @@ class Librarians:
     @staticmethod
     def lend_book_to_member(member,book):
         if_exists = int(ManageCSV.return_appearances(FileCSV.file_book.value, book))
+        print(f"Looking for book: {book}")
+        print(f"File path: {FileCSV.file_book.value}")
         if if_exists==0:
             print("Error,the book not found")
         else:

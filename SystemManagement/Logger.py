@@ -23,8 +23,8 @@ class Logger:
                     result = func(*args, **kwargs)
                     log.info(success_message)
                     return result
-                except Exception as e:
-                    log.error(f"{fail_message} {str(e)}")
+                except Exception:
+                    log.error(fail_message)
                     return None
             return wrapper
         return decorator
