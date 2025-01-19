@@ -3,15 +3,24 @@ from symtable import Class
 import csv
 
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from SystemManagement.Book.FileCSV import FileCSV
 import pandas as pd
 
 
 class ManageCSV:
+    """
+    Class for managing CSV operations related to books, users, and library functionalities.
+    """
 
     @staticmethod
     def add_book_to_csv(filename, book):
+        """
+        Appends a book's details to the specified CSV file.
+
+        Args:
+            filename (str): The path to the CSV file.
+            book: A book object with details to be added.
+        """
         book_dict = book.to_dict()
         book_df = pd.DataFrame([book_dict])
         try:
@@ -22,6 +31,12 @@ class ManageCSV:
 
     @staticmethod
     def add_new_book(book):
+        """
+        Adds a new book to the main books CSV file.
+
+        Args:
+            book: A book object with details to be added.
+        """
         book_filename = FileCSV.file_book.value
         book_dict = book.new_to_dict()
         book_df = pd.DataFrame([book_dict])
@@ -33,8 +48,14 @@ class ManageCSV:
 
     @staticmethod
     def add_users_to_csv(user):
-        filename=FileCSV.file_users.value
-        user_dict= user.to_dict()
+        """
+        Appends a user's details to the users CSV file.
+
+        Args:
+            user: A user object with details to be added.
+        """
+        filename = FileCSV.file_users.value
+        user_dict = user.to_dict()
         user_df = pd.DataFrame([user_dict])
         try:
             user_df.to_csv(filename, mode='a', index=False, encoding='utf-8',
@@ -44,8 +65,14 @@ class ManageCSV:
 
     @staticmethod
     def delete_user_from_csv(user):
+        """
+        Deletes a user from the users CSV file.
+
+        Args:
+            user: A user object to be removed.
+        """
         user_deleted = False
-        filename=FileCSV.file_users.value
+        filename = FileCSV.file_users.value
         df = pd.read_csv(filename)
 
         for index, row in df.iterrows():
@@ -55,16 +82,33 @@ class ManageCSV:
 
         df.to_csv(filename, index=False, encoding='utf-8')
 
-
     @staticmethod
     def return_appearances(filename, book):
+        """
+        Counts the number of appearances of a specific book in the CSV file.
+
+        Args:
+            filename (str): The path to the CSV file.
+            book: The book object to search for.
+
+        Returns:
+            int: Number of appearances of the book.
+        """
         df = pd.read_csv(filename)
         count = df[df['title'] == book.to_dict()['title']].shape[0]
         return count
 
-
     @staticmethod
     def user_exists(user_name):
+        """
+        Checks if a user exists in the users CSV file.
+
+        Args:
+            user_name (str): The username to search for.
+
+        Returns:
+            bool: True if the user exists, False otherwise.
+        """
         filename = FileCSV.file_users.value
         try:
             df = pd.read_csv(filename)
@@ -83,6 +127,13 @@ class ManageCSV:
 
     @staticmethod
     def delete_book_from_csv(filename, book):
+        """
+        Deletes a specific book from a CSV file.
+
+        Args:
+            filename (str): The path to the CSV file.
+            book: The book object to be removed.
+        """
         book_deleted = False
         df = pd.read_csv(filename)
 
@@ -95,6 +146,14 @@ class ManageCSV:
 
     @staticmethod
     def add_to_parameter(filename, book, parameter):
+        """
+        Increments the value of a specified parameter for a book in the CSV file.
+
+        Args:
+            filename (str): The path to the CSV file.
+            book: The book object.
+            parameter (str): The parameter to update.
+        """
         df = pd.read_csv(filename)
         current_value = df.loc[df["title"] == book.new_to_dict()["title"], parameter].iloc[0]
         try:
@@ -109,6 +168,14 @@ class ManageCSV:
 
     @staticmethod
     def sub_from_parameter(filename, book, parameter):
+        """
+        Decreases the value of a specified parameter for a book in the CSV file.
+
+        Args:
+            filename (str): The path to the CSV file.
+            book: The book object.
+            parameter (str): The parameter to update.
+        """
         df = pd.read_csv(filename)
         current_value = df.loc[df["title"] == book.new_to_dict()["title"], parameter].iloc[0]
         try:
@@ -122,7 +189,13 @@ class ManageCSV:
 
     @staticmethod
     def update_is_loaned(book):
-        filename=FileCSV.file_book.value
+        """
+        Updates the 'is_loaned' status for a book in the CSV file based on the copies loaned.
+
+        Args:
+            book: The book object.
+        """
+        filename = FileCSV.file_book.value
         df = pd.read_csv(filename)
         condition = df["title"] == book.to_dict()["title"]
         if df.loc[condition, "copies"].iloc[0] == df.loc[condition, "currently_loaned"].iloc[0]:
@@ -144,9 +217,18 @@ class ManageCSV:
         value = df.loc[df["title"] == book.to_dict()["title"], column].iloc[0]
         return value
 
-
     @staticmethod
     def log_in_librarian(user_name, password):
+        """
+        Validates the login credentials for a librarian.
+
+        Args:
+            user_name (str): The username entered by the librarian.
+            password (str): The password entered by the librarian.
+
+        Returns:
+            str: A message indicating the result of the login attempt ("Login successful", "Invalid password", etc.).
+        """
         filename = FileCSV.file_users.value
         try:
             df = pd.read_csv(filename)
@@ -173,8 +255,14 @@ class ManageCSV:
 
     @staticmethod
     def get_popular_books():
+        """
+        Retrieves the most popular books based on the number of requests.
+
+        Returns:
+            DataFrame: A DataFrame containing the top N popular books, sorted by request count.
+        """
         file_name = FileCSV.file_book.value
-        top_n=10
+        top_n = 10
         min_requests = 10
         try:
             df = pd.read_csv(file_name)
@@ -191,6 +279,13 @@ class ManageCSV:
 
     @staticmethod
     def add_to_waiting_list(book_title, member):
+        """
+        Adds a member to the waiting list for a specific book.
+
+        Args:
+            book_title (str): The title of the book.
+            member: The member to be added to the waiting list.
+        """
         file_name = FileCSV.file_book.value
         try:
             df = pd.read_csv(file_name)
@@ -217,6 +312,15 @@ class ManageCSV:
 
     @staticmethod
     def pop_from_waiting_list(book_title):
+        """
+        Removes the first member from the waiting list for a specific book and returns the member.
+
+        Args:
+            book_title (str): The title of the book.
+
+        Returns:
+            member: The first member from the waiting list or None if the list is empty.
+        """
         file_name = FileCSV.file_book.value
         try:
             df = pd.read_csv(file_name)
@@ -242,7 +346,7 @@ class ManageCSV:
             first_member = waiting_list.pop(0)
             df.loc[condition, "waiting_list"] = str(pickle.dumps(waiting_list))
             df.to_csv(file_name, index=False, encoding="utf-8")
-            print(f"Member {first_member.to_dict()["name"]} removed from the waiting list for book '{book_title}'.")
+            print(f"Member {first_member.to_dict()['name']} removed from the waiting list for book '{book_title}'.")
             return first_member
         except Exception as e:
             print(f"Error: {str(e)}")

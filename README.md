@@ -89,4 +89,8 @@ all through a fun, pink graphical user interface (GUI).
 
 ---
 
+## 🎥  YouTube video of our system
+
+ https://youtu.be/BgpbXirgu3o
+
 

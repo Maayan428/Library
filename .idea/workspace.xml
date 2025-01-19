@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e67b136-c28a-4b38-a909-55c74d892554" name="Changes" comment="library">
-      <change beforePath="$PROJECT_DIR$/SystemManagement/Book/books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Book/books.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemManagement/InitFiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/InitFiles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemManagement/Librarians.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Librarians.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemManagement/Library.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemManagement/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/Logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemManagement/ManageCSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemManagement/ManageCSV.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +256,7 @@
       <workItem from="1737099568610" duration="4955000" />
       <workItem from="1737114703687" duration="201000" />
       <workItem from="1737274520565" duration="17579000" />
-      <workItem from="1737293713157" duration="10668000" />
+      <workItem from="1737293713157" duration="14050000" />
     </task>
     <task id="LOCAL‎-00001" summary="library">
       <option name="closed" value="true" />
@@ -316,7 +322,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1737304039252</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="library">
+      <option name="closed" value="true" />
+      <created>1737304464855</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1737304464855</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,29 +355,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SystemManagement/Librarians.py</url>
-          <line>80</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SystemManagement/Librarians.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SystemManagement/Librarians.py</url>
-          <line>74</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/GUI.py</url>
           <line>678</line>
           <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SystemManagement/ManageCSV.py</url>
-          <line>59</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
